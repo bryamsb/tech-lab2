@@ -1,0 +1,261 @@
+{
+    "usuarios": [
+        {
+            "id": "d6a552cf-4f1f-568c-8a15-a9d410e3c4e7",
+            "username": "luis.pujay",
+            "full_name": "Luis Fernando Pujay Mateo",
+            "email": "",
+            "role": "admin",
+            "avatar_url": "",
+            "projects": [
+                "Coordinador Tech Lab"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "e5a4c9a9-83d9-5d85-98a0-40f0ab1c1af0",
+            "username": "edson.palacios",
+            "full_name": "Edson Vasquez Palacios",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Tecnología Blockchain"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "c35c26d6-3bf2-5a2a-9f47-78c8bd6c884e",
+            "username": "javier.gonzales",
+            "full_name": "Javier Arteaga Gonzales",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Tecnología Blockchain"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "c92f30ad-1586-5b52-9b6b-26b0b0d2a5a7",
+            "username": "cleber.gutierr",
+            "full_name": "Cleber Lee Aguado Gutiérr",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Cuenta Personas"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "b6307a3a-7fbb-55e0-8bda-74f0c9f6c03a",
+            "username": "alexander.sanchez",
+            "full_name": "Alexander Miller Rojas Sanchez",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Lora"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "f7f0b9bd-6a25-57c0-8dbf-7e7a85e2f5a5",
+            "username": "victor.bendezu",
+            "full_name": "Victor Adrian Anampa Bendezu",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Lora"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "c7d25e73-9e51-5b10-9c5f-2baf3d7a8a8a",
+            "username": "albert.rosales",
+            "full_name": "Albert Ken Argumedo Rosales",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Plataforma TechLab"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "d7f2ef8a-3b7c-5bd0-9e14-c6e5c2e6dbf4",
+            "username": "jhunior.lazaro",
+            "full_name": "Jhunior Eduardo Guevara Lázaro",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Plataforma TechLab",
+                "Tecnología Blockchain"
+            ],
+            "phone": "991004126",
+            "linkedin_url": "",
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "aee4c02c-2b05-56f5-9a7a-7e1d5d0c9b62",
+            "username": "mauricio.portocarrero",
+            "full_name": "Mauricio Rafael Vigo Portocarrero",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Módulo de Calidad de Aire Interior"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-07-01T00:00:00Z",
+            "updated_at": "2025-07-31T23:59:59Z"
+        },
+        {
+            "id": "2d8e420a-2436-5f72-9f46-2e1a0f3d1c8a",
+            "username": "jorge.ortega",
+            "full_name": "Jorge Luis Parishuaña Ortega",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Smart Parking",
+                "Plataforma TechLab"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-07-01T00:00:00Z",
+            "updated_at": "2025-07-31T23:59:59Z"
+        },
+        {
+            "id": "a8e9c1d1-2c9d-5a27-8d9b-0d0c52a4a8d3",
+            "username": "adrian.delgado",
+            "full_name": "Adrián Alonso Burga Delgado",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Smart Parking"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2025-07-01T00:00:00Z",
+            "updated_at": "2025-07-31T23:59:59Z"
+        },
+        {
+            "id": "3b49b1a8-3d30-5b6b-8a8c-0d5d4b5c8ef1",
+            "username": "elsa.cuestas",
+            "full_name": "Elsa Maria Mercedes Luque Cuestas",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Calidad de Aire Interior"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2023-07-01T00:00:00Z",
+            "updated_at": "2023-07-31T23:59:59Z"
+        },
+        {
+            "id": "a6c2a9ff-5b6a-5a2e-9d87-6b0b6f4b72c2",
+            "username": "mircea.calle",
+            "full_name": "Mircea Danitza Medina Calle",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Calidad de Aire Interior"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2023-07-01T00:00:00Z",
+            "updated_at": "2023-07-31T23:59:59Z"
+        },
+        {
+            "id": "6f1de1bf-30d8-5e4a-a2f2-b4d6a2a334a6",
+            "username": "kewin.claro",
+            "full_name": "Kewin Rougelly Cuadros Claro",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Calidad de Aire Interior"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2023-07-01T00:00:00Z",
+            "updated_at": "2023-07-31T23:59:59Z"
+        },
+        {
+            "id": "5d49e6db-06b1-52d1-8e8c-1d83b6d2b0cc",
+            "username": "paulo.cardenas",
+            "full_name": "Paulo Roberto Quispe Cardenas",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Calidad de Aire Interior"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2023-07-01T00:00:00Z",
+            "updated_at": "2023-07-31T23:59:59Z"
+        },
+        {
+            "id": "b7b9925f-9d72-57e2-9f4b-1f2a2f5cfc0a",
+            "username": "nicolas.matute",
+            "full_name": "Nicolás Francisco Silva Matute",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Calidad de Aire Interior"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2023-07-01T00:00:00Z",
+            "updated_at": "2023-07-31T23:59:59Z"
+        },
+        {
+            "id": "f2a2e6c1-9b8c-5a72-8a3a-1a8f7d8f1c5d",
+            "username": "mario.galindo",
+            "full_name": "Mario Fernando Achalma Galindo",
+            "email": "",
+            "role": "researcher",
+            "avatar_url": "",
+            "projects": [
+                "Calidad de Aire Interior"
+            ],
+            "phone": "",
+            "linkedin_url": "",
+            "created_at": "2023-07-01T00:00:00Z",
+            "updated_at": "2023-07-31T23:59:59Z"
+        }
+    ]
+}

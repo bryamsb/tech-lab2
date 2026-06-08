@@ -1,0 +1,199 @@
+{
+    "projects": [
+        {
+            "id": "5a72d6f1-c3b1-5f0b-8b13-0ffec9aa3c1b",
+            "title": "Tecnología Blockchain",
+            "description": "Sustento de actividades: implementación de una red blockchain privada basada en Ethereum (PoA/Clique).",
+            "category": "Blockchain",
+            "technologies": [
+                "Ethereum",
+                "Geth",
+                "PoA (Clique)"
+            ],
+            "related_technology_ids": [
+                "ethereum-blockchain-poa"
+            ],
+            "status": "completed",
+            "priority": "high",
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
+            "team_lead": "Edson Vasquez Palacios",
+            "team_members": [
+                "Javier Arteaga Gonzales"
+            ],
+            "budget": 0.0,
+            "progress": 100,
+            "objectives": [
+                "Implementar red Ethereum privada.",
+                "Validar conectividad y operación de nodos."
+            ],
+            "challenges": [
+                "Configuración de red privada y validadores."
+            ],
+            "gallery": [],
+            "demo_url": "https://blockchain-frontend-orpin.vercel.app/"
+        },
+        {
+            "id": "d2c2a2b4-01f8-5c14-8a6a-0e45c1b3a939",
+            "title": "Cuenta Personas",
+            "description": "Sustento de actividades: desarrollo de un sistema de conteo de personas.",
+            "category": "Computer Vision",
+            "technologies": [
+                "Detección de objetos",
+                "Tracking",
+                "Video Analytics"
+            ],
+            "related_technology_ids": [
+                "computer-vision-people-counting"
+            ],
+            "status": "completed",
+            "priority": "high",
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
+            "team_lead": "Cleber Lee Aguado Gutiérr",
+            "team_members": [],
+            "budget": 0.0,
+            "progress": 100,
+            "objectives": [
+                "Implementar conteo de personas.",
+                "Generar resultados de conteo por video."
+            ],
+            "challenges": [
+                "Evitar doble conteo y pérdidas de tracking."
+            ],
+            "gallery": [],
+            "demo_url": ""
+        },
+        {
+            "id": "7d9c6df0-80cc-5f59-bbd8-34b7efb9f561",
+            "title": "Lora",
+            "description": "Sustento de actividades: despliegue LoRaWAN y automatización de nodo.",
+            "category": "IoT",
+            "technologies": [
+                "LoRaWAN",
+                "Gateway outdoor",
+                "Firmware"
+            ],
+            "related_technology_ids": [
+                "lorawan-outdoor"
+            ],
+            "status": "completed",
+            "priority": "high",
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
+            "team_lead": "Alexander Miller Rojas Sanchez",
+            "team_members": [
+                "Victor Adrian Anampa Bendezu"
+            ],
+            "budget": 0.0,
+            "progress": 100,
+            "objectives": [
+                "Habilitar comunicación LoRaWAN.",
+                "Automatizar control del nodo."
+            ],
+            "challenges": [
+                "Unión y configuración de red LoRaWAN."
+            ],
+            "gallery": [],
+            "demo_url": ""
+        },
+        {
+            "id": "1a2b9f6b-3c2a-5db2-9b0d-cc2f5f3d72f3",
+            "title": "Plataforma TechLab",
+            "description": "Sustento de actividades: plataforma web para centralizar y difundir proyectos del Tech Lab.",
+            "category": "Plataforma",
+            "technologies": [
+                "Web Platform",
+                "Auth/Roles",
+                "Gestión de proyectos"
+            ],
+            "related_technology_ids": [
+                "techlab-platform"
+            ],
+            "status": "active",
+            "priority": "critical",
+            "start_date": "2025-12-01",
+            "end_date": null,
+            "team_lead": "Albert Ken Argumedo Rosales",
+            "team_members": [
+                "Jhunior Eduardo Guevara Lázaro",
+                "Jorge Luis Parishuaña Ortega"
+            ],
+            "budget": 0.0,
+            "progress": 80,
+            "objectives": [
+                "Centralizar proyectos del Tech Lab.",
+                "Gestionar investigadores y proyectos en una sola plataforma."
+            ],
+            "challenges": [
+                "Integración de información y escalabilidad del portal."
+            ],
+            "gallery": [],
+            "demo_url": ""
+        },
+        {
+            "id": "65b97c1d-0a6a-5fdd-9a9b-2c3b1c63cf5a",
+            "title": "Módulo de Calidad de Aire Interior",
+            "description": "Sustento de actividades: módulo IoT para monitorear calidad de aire interior.",
+            "category": "IoT / Salud Ambiental",
+            "technologies": [
+                "Sensores",
+                "IoT",
+                "Monitoreo ambiental"
+            ],
+            "related_technology_ids": [
+                "indoor-air-quality-iot"
+            ],
+            "status": "completed",
+            "priority": "high",
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-31",
+            "team_lead": "Mauricio Rafael Vigo Portocarrero",
+            "team_members": [],
+            "budget": 0.0,
+            "progress": 100,
+            "objectives": [
+                "Monitorear variables de aire interior.",
+                "Generar alertas y mediciones."
+            ],
+            "challenges": [
+                "Integración y calibración de sensores."
+            ],
+            "gallery": [],
+            "demo_url": ""
+        },
+        {
+            "id": "6f10d5d6-1d6a-5a4f-9d88-7cde2c4f0e8a",
+            "title": "Smart Parking",
+            "description": "Sustento de actividades: sistema de estacionamientos inteligentes con visión computacional.",
+            "category": "Smart City / Computer Vision",
+            "technologies": [
+                "Visión computacional",
+                "Cámaras",
+                "Detección de ocupación"
+            ],
+            "related_technology_ids": [
+                "smart-parking-vision"
+            ],
+            "status": "completed",
+            "priority": "high",
+            "start_date": "2025-07-01",
+            "end_date": "2025-07-31",
+            "team_lead": "Jorge Luis Parishuaña Ortega",
+            "team_members": [
+                "Adrián Alonso Burga Delgado"
+            ],
+            "budget": 0.0,
+            "progress": 100,
+            "objectives": [
+                "Detectar ocupación de plazas.",
+                "Reportar estado del estacionamiento."
+            ],
+            "challenges": [
+                "Oclusiones y variación de iluminación/perspectiva."
+            ],
+            "gallery": [],
+            "demo_url": ""
+        }
+    ]
+}

@@ -1,0 +1,238 @@
+{
+    "technologies": [
+        {
+            "id": "ethereum-blockchain-poa",
+            "name": "Ethereum Private Blockchain (PoA)",
+            "icon": "SiEthereum",
+            "gradient": "from-slate-900 to-indigo-700",
+            "primary_color": "#627EEA",
+            "description": "Red Ethereum privada con consenso Proof of Authority (Clique) usando Geth.",
+            "about_title": "Sobre la tecnología",
+            "about_content": [
+                "Red Ethereum privada (Geth).",
+                "Consenso PoA (Clique) con validadores autorizados.",
+                "Conectividad P2P y sincronización de bloques."
+            ],
+            "features_title": "Características",
+            "features_items": [
+                {
+                    "text": "Consenso PoA (Clique)",
+                    "color": "#22C55E"
+                },
+                {
+                    "text": "Nodos validadores autorizados",
+                    "color": "#3B82F6"
+                },
+                {
+                    "text": "Red privada para pruebas",
+                    "color": "#F59E0B"
+                }
+            ],
+            "projects": [
+                {
+                    "title": "Tecnología Blockchain",
+                    "description": "Implementación de red Ethereum privada en Tech Lab."
+                }
+            ],
+            "has_direct_links": false,
+            "direct_links": [],
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "computer-vision-people-counting",
+            "name": "Computer Vision (People Counting)",
+            "icon": "MdOutlineVisibility",
+            "gradient": "from-emerald-800 to-teal-500",
+            "primary_color": "#10B981",
+            "description": "Detección y conteo de personas en video con tracking multi-objeto.",
+            "about_title": "Sobre la tecnología",
+            "about_content": [
+                "Detección de personas en video.",
+                "Tracking con IDs para evitar doble conteo.",
+                "Conteo por línea/zonas y exportación de resultados."
+            ],
+            "features_title": "Características",
+            "features_items": [
+                {
+                    "text": "Detección + Tracking",
+                    "color": "#22C55E"
+                },
+                {
+                    "text": "Conteo por zonas/líneas",
+                    "color": "#A855F7"
+                },
+                {
+                    "text": "Exportación de métricas",
+                    "color": "#F97316"
+                }
+            ],
+            "projects": [
+                {
+                    "title": "Cuenta Personas",
+                    "description": "Sistema de conteo de personas (Tech Lab)."
+                }
+            ],
+            "has_direct_links": false,
+            "direct_links": [],
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "lorawan-outdoor",
+            "name": "LoRaWAN (Outdoor)",
+            "icon": "GiRadioTower",
+            "gradient": "from-orange-700 to-yellow-500",
+            "primary_color": "#F59E0B",
+            "description": "Comunicación IoT de largo alcance con LoRaWAN y gateway outdoor.",
+            "about_title": "Sobre la tecnología",
+            "about_content": [
+                "Gateway LoRaWAN outdoor.",
+                "Nodo LoRa controlado por microcontrolador.",
+                "Envío de payloads al servidor LoRaWAN."
+            ],
+            "features_title": "Características",
+            "features_items": [
+                {
+                    "text": "Largo alcance y bajo consumo",
+                    "color": "#22C55E"
+                },
+                {
+                    "text": "Gateway outdoor",
+                    "color": "#3B82F6"
+                },
+                {
+                    "text": "Control por firmware",
+                    "color": "#EF4444"
+                }
+            ],
+            "projects": [
+                {
+                    "title": "Lora",
+                    "description": "Despliegue outdoor y automatización de nodo LoRaWAN."
+                }
+            ],
+            "has_direct_links": false,
+            "direct_links": [],
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "techlab-platform",
+            "name": "Plataforma TechLab",
+            "icon": "SiNextdotjs",
+            "gradient": "from-sky-900 to-sky-500",
+            "primary_color": "#38BDF8",
+            "description": "Plataforma web para centralizar proyectos e información del Tech Lab.",
+            "about_title": "Sobre la tecnología",
+            "about_content": [
+                "Plataforma web para difusión y centralización.",
+                "Autenticación y roles de usuario.",
+                "Módulos para proyectos e investigadores."
+            ],
+            "features_title": "Características",
+            "features_items": [
+                {
+                    "text": "Auth y roles",
+                    "color": "#22C55E"
+                },
+                {
+                    "text": "Gestión de proyectos",
+                    "color": "#3B82F6"
+                },
+                {
+                    "text": "Extensible a nuevos módulos",
+                    "color": "#F59E0B"
+                }
+            ],
+            "projects": [
+                {
+                    "title": "Plataforma TechLab",
+                    "description": "Portal e integración de proyectos del laboratorio."
+                }
+            ],
+            "has_direct_links": false,
+            "direct_links": [],
+            "created_at": "2025-12-01T00:00:00Z",
+            "updated_at": "2025-12-31T23:59:59Z"
+        },
+        {
+            "id": "indoor-air-quality-iot",
+            "name": "Módulo de Calidad de Aire Interior",
+            "icon": "MdAir",
+            "gradient": "from-cyan-900 to-emerald-600",
+            "primary_color": "#06B6D4",
+            "description": "Módulo IoT para monitoreo de condiciones de aire interior.",
+            "about_title": "Sobre la tecnología",
+            "about_content": [
+                "Medición de variables de calidad de aire en interiores.",
+                "Alertas según umbrales.",
+                "Integración de sensores con microcontrolador."
+            ],
+            "features_title": "Características",
+            "features_items": [
+                {
+                    "text": "Monitoreo en interiores",
+                    "color": "#22C55E"
+                },
+                {
+                    "text": "Alertas por umbrales",
+                    "color": "#EF4444"
+                },
+                {
+                    "text": "Integración IoT",
+                    "color": "#3B82F6"
+                }
+            ],
+            "projects": [
+                {
+                    "title": "Módulo de Calidad de Aire Interior",
+                    "description": "Diseño e implementación del módulo (Tech Lab)."
+                }
+            ],
+            "has_direct_links": false,
+            "direct_links": [],
+            "created_at": "2025-07-01T00:00:00Z",
+            "updated_at": "2025-07-31T23:59:59Z"
+        },
+        {
+            "id": "smart-parking-vision",
+            "name": "Smart Parking",
+            "icon": "FaParking",
+            "gradient": "from-zinc-900 to-zinc-600",
+            "primary_color": "#A1A1AA",
+            "description": "Detección de ocupación de estacionamientos con visión computacional.",
+            "about_title": "Sobre la tecnología",
+            "about_content": [
+                "Cámaras para capturar video.",
+                "Procesamiento local con visión computacional.",
+                "Exposición de estado mediante servicios."
+            ],
+            "features_title": "Características",
+            "features_items": [
+                {
+                    "text": "Detección de ocupación",
+                    "color": "#22C55E"
+                },
+                {
+                    "text": "Procesamiento de video",
+                    "color": "#3B82F6"
+                },
+                {
+                    "text": "Integración con servicios",
+                    "color": "#F59E0B"
+                }
+            ],
+            "projects": [
+                {
+                    "title": "Smart Parking",
+                    "description": "Sistema de estacionamientos inteligentes (Tech Lab)."
+                }
+            ],
+            "has_direct_links": false,
+            "direct_links": [],
+            "created_at": "2025-07-01T00:00:00Z",
+            "updated_at": "2025-07-31T23:59:59Z"
+        }
+    ]
+}
