@@ -2,17 +2,25 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import type { User, Session } from '@supabase/supabase-js';
 
+export interface UserProfile {
+  id: string;
+  username: string;
+  email: string;
+  role: string;
+  full_name: string;
+}
 interface AuthContextType {
-  user: any;
-  session: any;
+  user: User | null;
+session: Session | null;
   loading: boolean;
   signInWithGoogle: () => Promise<{ error: any }>;
   signInWithGitHub: () => Promise<{ error: any }>;
   signInWithEmail: (email: string, password: string) => Promise<{ error: any }>;
   signUp: (email: string, password: string, userData?: any) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
-  profile: any;
+  profile: UserProfile | null;
   updateProfile: (updates: any) => Promise<{ error: any }>;
 }
 
@@ -21,7 +29,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [session, setSession] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   const fetchProfile = async (userId: string) => {
