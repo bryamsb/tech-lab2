@@ -10,6 +10,7 @@ export interface UserProfile {
   email: string;
   role: string;
   full_name: string;
+  avatar_url?: string | null;
 }
 interface AuthContextType {
   user: User | null;
