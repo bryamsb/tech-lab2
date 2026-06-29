@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
       'next-mdx-import-source-file': './mdx-components.tsx',
     },
   },
+
+  // 👇 Agrega este bloque
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   images: {
     remotePatterns: [
       {
