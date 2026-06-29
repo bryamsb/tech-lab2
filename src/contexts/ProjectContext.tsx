@@ -13,7 +13,7 @@ export interface TechProject {
   description: string;
   category: string;
   technologies: string[];
-  relatedTechnologyIds: string[]; // IDs de tecnologías vinculadas
+  relatedTechnologyIds: string[];
   status: 'active' | 'completed' | 'paused' | 'planning';
   priority: 'low' | 'medium' | 'high' | 'critical';
   startDate: string;
@@ -21,10 +21,10 @@ export interface TechProject {
   teamLead: string;
   teamMembers: string[];
   budget?: number;
-  progress: number; // 0-100
+  progress: number;
   objectives: string[];
   challenges?: string[];
-  gallery: string[]; // URLs de imágenes
+  gallery: string[];
   demoUrl?: string;
   repositoryUrl?: string;
   documentation?: string;
@@ -32,7 +32,6 @@ export interface TechProject {
   updatedAt: string;
   createdBy: string;
   positions?: string[];
-
 }
 
 interface ProjectContextType {
@@ -86,7 +85,6 @@ function convertSupabaseProjectToLegacy(
     updatedAt: supabaseProject.updated_at,
     createdBy: supabaseProject.created_by || 'unknown',
     positions: supabaseProject.positions || [],
-
   };
 }
 
@@ -117,11 +115,13 @@ function convertLegacyProjectToSupabase(
     demo_url: legacyProject.demoUrl,
     repository_url: legacyProject.repositoryUrl,
     documentation: legacyProject.documentation,
-    created_by: legacyProject.createdBy,
+    // ✅ FIX 1: positions ahora se incluye en el payload
+    positions: legacyProject.positions || [],
   };
 }
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
+
 export function ProjectProvider({ children }: { children: React.ReactNode }) {
   const {
     projects: supabaseProjects,
@@ -157,7 +157,6 @@ export function ProjectProvider({ children }: { children: React.ReactNode }) {
   const updateProject = useCallback(
     async (id: string, updates: Partial<TechProject>): Promise<boolean> => {
       try {
-        // Convertir updates al formato de Supabase
         const supabaseUpdates: Partial<SupabaseProject> = {};
 
         if (updates.title) supabaseUpdates.title = updates.title;
@@ -187,6 +186,9 @@ export function ProjectProvider({ children }: { children: React.ReactNode }) {
           supabaseUpdates.repository_url = updates.repositoryUrl;
         if (updates.documentation)
           supabaseUpdates.documentation = updates.documentation;
+        // ✅ FIX 1: positions también se mapea al actualizar
+        if (updates.positions !== undefined)
+          supabaseUpdates.positions = updates.positions;
 
         const result = await updateSupabaseProject(id, supabaseUpdates);
         return result !== null;

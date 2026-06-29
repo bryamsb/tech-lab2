@@ -1,7 +1,6 @@
-
 'use client';
-import { supabase } from '@/lib/supabase';
 
+import { supabase } from '@/lib/supabase';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
@@ -73,7 +72,7 @@ type MockUserProfile = {
   specializations?: string[];
   phone?: string;
   linkedin_url?: string;
-  degree?: string; 
+  degree?: string;
   university?: string;
   created_at: string;
   updated_at: string;
@@ -101,6 +100,10 @@ interface UseSupabaseResearchersOptions {
   autoFetch?: boolean;
 }
 
+// Helper: detect if a string looks like a UUID
+const isUUID = (value: string): boolean =>
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value.trim());
+
 export function useSupabaseResearchers(options?: UseSupabaseResearchersOptions) {
   const autoFetch = options?.autoFetch ?? true;
   const [researchers, setResearchers] = useState<SupabaseResearcher[]>([]);
@@ -115,7 +118,7 @@ export function useSupabaseResearchers(options?: UseSupabaseResearchersOptions) 
       .replace(/[\u0300-\u036f]/g, '')
       .trim();
 
-  const parseUserProjectNames = (projects: MockUserProfile['projects']): string[] => {
+  const parseUserProjectRefs = (projects: MockUserProfile['projects']): string[] => {
     if (!projects) return [];
 
     if (Array.isArray(projects)) {
@@ -132,6 +135,7 @@ export function useSupabaseResearchers(options?: UseSupabaseResearchersOptions) 
     (user: MockUserProfile, projectsData: MockProject[]): SupabaseResearcher => {
       const fullNameLower = user.full_name.toLowerCase();
 
+      // Find projects where user is in team by name
       const relatedProjectsByTeam = projectsData.filter((project) => {
         const teamLead = (project.team_lead || '').toLowerCase();
         const teamMembers = (project.team_members || []).map((member) =>
@@ -140,21 +144,47 @@ export function useSupabaseResearchers(options?: UseSupabaseResearchersOptions) 
         return teamLead === fullNameLower || teamMembers.includes(fullNameLower);
       });
 
-      const declaredProjectNames = parseUserProjectNames(user.projects);
-      const relatedProjectsByDeclaredNames = projectsData.filter((project) => {
-        const normalizedProjectTitle = normalizeText(project.title);
-        return declaredProjectNames.some((declaredName) => {
-          const normalizedDeclared = normalizeText(declaredName);
-          return (
-            normalizedProjectTitle.includes(normalizedDeclared) ||
-            normalizedDeclared.includes(normalizedProjectTitle)
-          );
-        });
-      });
+      // Parse user.projects — can be UUIDs or names
+      const declaredProjectRefs = parseUserProjectRefs(user.projects);
 
-      const relatedProjects = relatedProjectsByDeclaredNames.length
-        ? relatedProjectsByDeclaredNames
+      // Separate UUIDs from name-based refs
+      const declaredUUIDs = declaredProjectRefs.filter(isUUID);
+      const declaredNames = declaredProjectRefs.filter((ref) => !isUUID(ref));
+
+      // Match by UUID
+      const relatedProjectsByUUID = declaredUUIDs.length > 0
+        ? projectsData.filter((project) => declaredUUIDs.includes(project.id))
+        : [];
+
+      // Match by name (fuzzy)
+      const relatedProjectsByDeclaredNames = declaredNames.length > 0
+        ? projectsData.filter((project) => {
+            const normalizedProjectTitle = normalizeText(project.title);
+            return declaredNames.some((declaredName) => {
+              const normalizedDeclared = normalizeText(declaredName);
+              return (
+                normalizedProjectTitle.includes(normalizedDeclared) ||
+                normalizedDeclared.includes(normalizedProjectTitle)
+              );
+            });
+          })
+        : [];
+
+      // Merge all matched projects (deduplicate by id)
+      const allMatchedByDeclaration = [
+        ...relatedProjectsByUUID,
+        ...relatedProjectsByDeclaredNames,
+      ].filter(
+        (project, index, self) => self.findIndex((p) => p.id === project.id) === index
+      );
+
+      // Priority: declared project refs > team membership
+      const relatedProjects = allMatchedByDeclaration.length > 0
+        ? allMatchedByDeclaration
         : relatedProjectsByTeam;
+
+      // Build research_interests from project TITLES (never UUIDs)
+      const researchInterestTitles = relatedProjects.map((p) => p.title);
 
       const currentProjects = relatedProjects
         .filter((project) => project.status === 'active' || project.status === 'planning')
@@ -184,9 +214,9 @@ export function useSupabaseResearchers(options?: UseSupabaseResearchersOptions) 
         position: (user as any).position || (user.role === 'admin' ? 'Coordinador' : 'Investigador'),
         department: 'Tech Lab',
         specializations: (user.specializations && user.specializations.length > 0)
-  ? user.specializations
-  : [],
-        biography: user.bio || (declaredProjectNames.length ? `Investigador Tech Lab (${declaredProjectNames.join(' / ')}).` : ''),
+          ? user.specializations
+          : [],
+        biography: user.bio || (researchInterestTitles.length ? `Investigador Tech Lab (${researchInterestTitles.join(' / ')}).` : ''),
         academic_level: (user as any).academic_level || 'bachelor',
 
         status: 'active',
@@ -198,8 +228,13 @@ export function useSupabaseResearchers(options?: UseSupabaseResearchersOptions) 
         orcid: '',
         personal_website: '',
         university: (user as any).university || 'Universidad Nacional de Ingeniería',
-degree: user.degree || '',
-        research_interests: declaredProjectNames.length ? declaredProjectNames : user.bio ? [user.bio] : [],
+        degree: user.degree || '',
+        // Use project TITLES, never raw UUIDs
+        research_interests: researchInterestTitles.length
+          ? researchInterestTitles
+          : user.bio
+          ? [user.bio]
+          : [],
         publications: [],
         achievements: [],
         projects_completed: relatedProjects.length,
@@ -322,9 +357,7 @@ degree: user.degree || '',
           };
         })
       );
-
-      if (!found) throw new Error('Investigador no encontrado');
-      return true;
+      return found;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error actualizando investigador');
       console.error('Error updating researcher:', err);
@@ -335,14 +368,7 @@ degree: user.degree || '',
   // Eliminar investigador
   const deleteResearcher = useCallback(async (id: string): Promise<boolean> => {
     try {
-      let deleted = false;
-      setResearchers((prev) => {
-        const next = prev.filter((researcher) => researcher.id !== id);
-        deleted = next.length !== prev.length;
-        return next;
-      });
-
-      if (!deleted) throw new Error('Investigador no encontrado');
+      setResearchers((prev) => prev.filter((researcher) => researcher.id !== id));
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error eliminando investigador');
@@ -351,74 +377,6 @@ degree: user.degree || '',
     }
   }, []);
 
-  // Asignar investigador a proyecto
-  const assignToProject = useCallback(async (
-    researcherId: string,
-    projectId: string,
-    role: string
-  ): Promise<boolean> => {
-    try {
-      setResearchers((prev) =>
-        prev.map((researcher) => {
-          if (researcher.id !== researcherId) return researcher;
-
-          const currentProjects = researcher.current_projects || [];
-          if (currentProjects.some((project) => project.id === projectId)) return researcher;
-
-          return {
-            ...researcher,
-            current_projects: [
-              ...currentProjects,
-              {
-                id: projectId,
-                title: `Proyecto ${projectId}`,
-                role,
-                status: 'active',
-                progress: 0,
-              },
-            ],
-            updated_at: new Date().toISOString(),
-          };
-        })
-      );
-
-      return true;
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error asignando investigador');
-      console.error('Error assigning researcher:', err);
-      return false;
-    }
-  }, []);
-
-  // Obtener estadísticas
-  const getResearcherStats = useCallback(() => {
-    const total = researchers.length;
-    const active = researchers.filter(r => r.status === 'active').length;
-    const departments = [...new Set(researchers.map(r => r.department))];
-    const avgPublications = researchers.reduce((sum, r) => sum + r.publications_count, 0) / total || 0;
-    const totalProjects = researchers.reduce((sum, r) => sum + r.projects_completed, 0);
-
-    return {
-      total,
-      active,
-      inactive: researchers.filter(r => r.status === 'inactive').length,
-      alumni: researchers.filter(r => r.status === 'alumni').length,
-      visiting: researchers.filter(r => r.status === 'visiting').length,
-      departments: departments.length,
-      avgPublications: Math.round(avgPublications),
-      totalProjects,
-      academicLevels: {
-        undergraduate: researchers.filter(r => r.academic_level === 'undergraduate').length,
-        bachelor: researchers.filter(r => r.academic_level === 'bachelor').length,
-        master: researchers.filter(r => r.academic_level === 'master').length,
-        phd: researchers.filter(r => r.academic_level === 'phd').length,
-        postdoc: researchers.filter(r => r.academic_level === 'postdoc').length,
-        professor: researchers.filter(r => r.academic_level === 'professor').length
-      }
-    };
-  }, [researchers]);
-
-  // Cargar datos al montar el componente (una sola vez, protegido ante StrictMode)
   useEffect(() => {
     if (!autoFetch) return;
     if (hasAutoFetched.current) return;
@@ -437,7 +395,5 @@ degree: user.degree || '',
     createResearcher,
     updateResearcher,
     deleteResearcher,
-    assignToProject,
-    getResearcherStats
   };
 }

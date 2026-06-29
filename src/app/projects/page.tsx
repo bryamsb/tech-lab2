@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { EditProjectModal } from '@/components/EditProjectModal';
 import {
   Search,
   Plus,
   Trash2,
+  Edit3, 
   FolderOpen,
   Calendar,
   Users,
@@ -33,6 +35,7 @@ export default function ProjectsPage() {
   const {
     projects,
     addProject,
+    updateProject,
     deleteProject,
     searchProjects,
     filterByStatus,
@@ -53,9 +56,14 @@ export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<TechProject | null>(
     null
   );
+  const [showEditModal, setShowEditModal] = useState(false);
+
   const [filteredProjects, setFilteredProjects] =
     useState<TechProject[]>(projects);
   const lastFetchKey = useRef<string | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+const [deletingProject, setDeletingProject] = useState<TechProject | null>(null);
+const [deleting, setDeleting] = useState(false);
 
   // Permitir acceso sin autenticación pero con funcionalidades limitadas
   // No redirigir automáticamente al login
@@ -176,6 +184,15 @@ export default function ProjectsPage() {
     high: 'Alta',
     critical: 'Crítica',
   };
+
+  const handleDeleteProject = async () => {
+  if (!deletingProject) return;
+  setDeleting(true);
+  await deleteProject(deletingProject.id);
+  setDeleting(false);
+  setShowDeleteModal(false);
+  setDeletingProject(null);
+};
 
   return (
     <div className="min-h-screen bg-theme-background">
@@ -466,28 +483,31 @@ export default function ProjectsPage() {
 
                   {/* Botones Admin */}
                   {isAdmin && (
-                    <>
-                      {/* TODO: Implementar modal de edición
-                      <button
-                        onClick={() => {
-                          setSelectedProject(project);
-                          setShowEditModal(true);
-                        }}
-                        className="p-2 text-theme-secondary hover:text-theme-text hover:bg-theme-accent/10 rounded-lg transition-colors"
-                        title="Editar"
-                      >
-                        <Edit3 className="w-4 h-4" />
-                      </button>
-                      */}
-                      <button
-                        onClick={() => deleteProject(project.id)}
-                        className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors"
-                        title="Eliminar"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </>
-                  )}
+  <>
+    
+    <button
+      onClick={() => {
+        setSelectedProject(project);
+        setShowEditModal(true);
+      }}
+      className="p-2 text-theme-secondary hover:text-theme-text hover:bg-theme-accent/10 rounded-lg transition-colors"
+      title="Editar"
+    >
+      <Edit3 className="w-4 h-4" />
+    </button>
+
+    <button
+  onClick={() => {
+    setDeletingProject(project);
+    setShowDeleteModal(true);
+  }}
+  className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors"
+  title="Eliminar"
+>
+  <Trash2 className="w-4 h-4" />
+</button>
+  </>
+)}
                 </div>
               </div>
             </div>
@@ -533,6 +553,58 @@ export default function ProjectsPage() {
           onClose={() => setShowViewModal(false)}
           project={selectedProject}
         />
+
+        {isAdmin && selectedProject && (
+  <EditProjectModal
+    isOpen={showEditModal}
+    onClose={() => { setShowEditModal(false); setSelectedProject(null); }}
+    project={selectedProject}
+    onUpdate={updateProject}
+  />
+)}
+
+
+{showDeleteModal && deletingProject && (
+  <div
+    className="fixed inset-0 z-[9999] flex items-center justify-center"
+    style={{ backgroundColor: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(4px)' }}
+    onClick={(e) => { if (e.target === e.currentTarget) setShowDeleteModal(false); }}
+  >
+    <div
+      className="border border-theme-border rounded-2xl shadow-2xl w-full max-w-md mx-4"
+      style={{ backgroundColor: 'var(--modal-bg)' }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="px-6 pt-6 pb-4 border-b border-theme-border">
+        <h2 className="text-xl font-semibold text-theme-text">Confirmar eliminación</h2>
+      </div>
+      <div className="px-6 py-5">
+        <p className="text-theme-secondary text-sm">
+          ¿Estás seguro de eliminar el proyecto{' '}
+          <span className="text-theme-text font-semibold">{deletingProject.title}</span>?
+          Esta acción no se puede deshacer.
+        </p>
+      </div>
+      <div className="flex gap-3 px-6 pb-6">
+        <button
+          onClick={() => { setShowDeleteModal(false); setDeletingProject(null); }}
+          className="flex-1 py-2.5 rounded-xl border border-red-500/50 text-sm font-medium transition-colors text-red-400 hover:bg-red-500/10 cursor-pointer"
+        >
+          No
+        </button>
+        <button
+          onClick={handleDeleteProject}
+          disabled={deleting}
+          className="flex-1 rounded-xl bg-red-500 px-6 py-2.5 text-sm font-bold text-white hover:bg-red-600 transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
+        >
+          {deleting ? (
+            <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Eliminando...</>
+          ) : 'Sí, eliminar'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       </main>
     </div>
   );

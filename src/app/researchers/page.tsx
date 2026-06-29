@@ -311,12 +311,12 @@ const handleCreateUser = async (e: React.FormEvent) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      ...createForm,
-      projects: createForm.projects ? [createForm.projects] : [],
-      specializations: createForm.specializations,
-
-
-    }),
+  username: createForm.username,
+  full_name: createForm.full_name,
+  email: createForm.email,
+  password: createForm.password,
+  phone: createForm.phone,
+}),
   });
   const data = await res.json();
   if (data.error) {
@@ -325,7 +325,8 @@ const handleCreateUser = async (e: React.FormEvent) => {
     setCreateMessage({ type: 'success', text: '¡Usuario creado correctamente!' });
     setTimeout(() => {
       setShowCreateModal(false);
-      setCreateForm({ username: '', full_name: '', email: '', password: '', phone: '', specializations: '' });
+      setCreateForm({ username: '', full_name: '', email: '', password: '', phone: '', projects: '', specializations: '' });
+
       setCreateMessage(null);
       fetchResearchers();
     }, 1500);
@@ -344,12 +345,10 @@ const handleCreateUser = async (e: React.FormEvent) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      id: editingResearcher.id,
-      full_name: editForm.full_name,
-      phone: editForm.phone,
-      projects: editForm.projects,
-      specializations: editForm.specializations,
-    }),
+  id: editingResearcher.id,
+  full_name: editForm.full_name,
+  phone: editForm.phone,
+}),
   });
   const data = await res.json();
   if (data.error) {
@@ -706,19 +705,15 @@ const handleDeleteUser = async () => {
                     <div className="flex flex-wrap gap-2">
                       <button
                         onClick={() => {
-  const currentProject = researcher.current_projects?.[0]?.title || researcher.past_projects?.[0]?.title || '';
-  const project = projects.find(p => p.title === currentProject);
-  const positions = (project as any)?.positions || [];
-  setAvailablePositions(positions);
   setEditingResearcher(researcher);
-  setEditForm({
-    username: researcher.name,
-    full_name: researcher.name,
-    email: researcher.email,
-    phone: researcher.phone || '',
-    projects: currentProject,
-    specializations: researcher.specializations?.[0] || '',
-  });
+setEditForm({
+  username: researcher.name,
+  full_name: researcher.name,
+  email: researcher.email,
+  phone: researcher.phone || '',
+  projects: '',
+  specializations: '',
+});
   setShowEditModal(true);
 }}
                         className="p-2.5 text-theme-secondary hover:text-theme-text hover:bg-theme-accent/10 border border-theme-border/60 rounded-lg transition-colors"
@@ -859,7 +854,7 @@ const handleDeleteUser = async () => {
               className="w-full rounded-lg border border-theme-border px-3 py-2.5 text-sm text-theme-text placeholder-theme-secondary/50 focus:outline-none focus:ring-2 focus:ring-theme-accent/50 focus:border-theme-accent transition-all bg-theme-bg" />
           </div>
         ))}
-        <div className="space-y-1.5">
+        {/*<div className="space-y-1.5">
   <label className="block text-xs font-semibold text-theme-secondary uppercase tracking-wide">Proyecto</label>
   <select value={createForm.projects}
     onChange={(e) => handleProjectChange(e.target.value, 'create')}
@@ -883,6 +878,8 @@ const handleDeleteUser = async () => {
     ))}
   </select>
 </div>
+
+ */}
 
         {createMessage && (
           <div className={`rounded-lg px-4 py-3 text-sm font-medium border ${
@@ -940,6 +937,7 @@ const handleDeleteUser = async () => {
               className="w-full rounded-lg border border-theme-border px-3 py-2.5 text-sm text-theme-text placeholder-theme-secondary/50 focus:outline-none focus:ring-2 focus:ring-theme-accent/50 focus:border-theme-accent transition-all bg-theme-bg" />
           </div>
         ))}
+        {/*
         <div className="space-y-1.5">
           <label className="block text-xs font-semibold text-theme-secondary uppercase tracking-wide">Proyecto</label>
           <select value={editForm.projects}
@@ -964,6 +962,7 @@ const handleDeleteUser = async () => {
     ))}
   </select>
 </div>
+*/}
         {editMessage && (
           <div className={`rounded-lg px-4 py-3 text-sm font-medium border ${
             editMessage.type === 'success'
